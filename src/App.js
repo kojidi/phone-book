@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("https://kojidi.github.io/phone-book/phones").then((response) => {
+    axios.get("https://kojidi.github.io/phone-book/db/phones").then((response) => {
       setAllNumbers(response.data);
       setLoading(false);
     });
@@ -43,7 +43,7 @@ const App = () => {
       };
 
       axios
-        .post("https://kojidi.github.io/phone-book/phones", newPhoneNumber)
+        .post("https://kojidi.github.io/phone-book/db/phones", newPhoneNumber)
         .then((response) => {
           setAllNumbers(allNumbers.concat(response.data));
         });
@@ -71,7 +71,7 @@ const App = () => {
       setErrorMessage("Please Enter a valid Number");
     } else if (currentNum.phoneNumber === editNumber) {
       setErrorColor("#009432");
-      const url = `https://kojidi.github.io/phone-book/phones/${editId}`;
+      const url = `https://kojidi.github.io/phone-book/db/phones/${editId}`;
       const editedNumber = allNumbers.find((n) => n.id === editId);
       const changedNumber = {
         ...editedNumber,
@@ -103,7 +103,7 @@ const App = () => {
       setErrorMessage("This Number has Entered Before");
     } else {
       setErrorColor("#009432");
-      const url = `https://kojidi.github.io/phone-book/phones/${editId}`;
+      const url = `https://kojidi.github.io/phone-book/db/phones/${editId}`;
       const editedNumber = allNumbers.find((n) => n.id === editId);
       const changedNumber = {
         ...editedNumber,
@@ -141,7 +141,7 @@ const App = () => {
   const popUpYes = () => {
     setErrorColor("#009432");
     axios
-      .delete(`https://kojidi.github.io/phone-book/phones/${delId}`)
+      .delete(`https://kojidi.github.io/phone-book/db/phones/${delId}`)
       .then((res) => {
         // data I think can be res.id
         setAllNumbers(allNumbers.filter((num) => num.id !== delId));
